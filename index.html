@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Me Employed — AI Bootcamps</title>
+<meta name="description" content="Pick the AI bootcamp you want. We build the most-requested one and run it live, in person, with a certificate at the end.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1F3D;
+    --paper:#FAF8F3;
+    --paper-dim:#F0ECE2;
+    --red:#C89B3C;
+    --red-dark:#A67D28;
+    --green:#1B3A5C;
+    --green-light:#E8EDF2;
+    --stone:#C9C2B4;
+    --stone-dark:#8B7355;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.display{
+    font-family:'Archivo', sans-serif;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    line-height:0.95;
+    margin:0;
+  }
+  .label, .mono{
+    font-family:'JetBrains Mono', monospace;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* ===== HEADER ===== */
+  header{
+    border-bottom:2px solid var(--ink);
+    padding:18px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--paper);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .brand{
+    font-family:'Archivo',sans-serif;
+    font-weight:900;
+    font-size:18px;
+    text-transform:uppercase;
+    letter-spacing:-0.02em;
+  }
+  .brand span{color:var(--red);}
+  .header-cta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    border:1.5px solid var(--ink);
+    padding:9px 16px;
+    border-radius:2px;
+    background:var(--ink);
+    color:var(--paper);
+    cursor:pointer;
+    transition:transform .15s ease;
+  }
+  .header-cta:hover{transform:translateY(-1px);}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:72px 24px 56px;
+    border-bottom:2px solid var(--ink);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--red-dark);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .hero-eyebrow::before{
+    content:"";
+    width:8px;height:8px;
+    background:var(--red);
+    display:inline-block;
+    border-radius:50%;
+  }
+  .hero h1{
+    font-size:clamp(40px,6.4vw,76px);
+    max-width:920px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--red);
+  }
+  .hero-sub{
+    font-size:19px;
+    max-width:600px;
+    margin:26px 0 0;
+    color:#3a362f;
+  }
+  .hero-sub strong{
+    color:var(--ink);
+    font-weight:700;
+    text-transform:uppercase;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    margin-top:36px;
+    padding-top:28px;
+    border-top:1px solid var(--stone);
+  }
+  .hero-meta-item{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+  }
+  .hero-meta-item b{
+    display:block;
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:22px;
+    text-transform:none;
+    margin-bottom:2px;
+  }
+
+  /* ===== HOW IT WORKS STRIP ===== */
+  .how{
+    border-bottom:2px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper);
+    padding:28px 24px;
+  }
+  .how-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .how-step{
+    font-size:14px;
+  }
+  .how-step .num{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--red);
+    font-size:13px;
+    display:block;
+    margin-bottom:6px;
+  }
+  .how-step p{margin:0;color:#E8E3D8;font-family:'Source Serif 4',serif;}
+
+  /* ===== ROSTER (course sign-up sheet) ===== */
+  .roster-section{
+    padding:64px 24px 40px;
+  }
+  .roster-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:28px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:18px;
+  }
+  .roster-head h2{font-size:clamp(28px,4vw,40px);}
+  .roster-head p{
+    margin:8px 0 0;
+    color:#5a554a;
+    font-size:15px;
+    max-width:420px;
+  }
+  .tally-note{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    text-align:right;
+    color:var(--stone-dark);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+
+  .sheet{
+    border:2px solid var(--ink);
+    background:#fff;
+  }
+  .sheet-row{
+    display:grid;
+    grid-template-columns:56px 1fr 110px;
+    align-items:center;
+    border-bottom:1.5px solid var(--ink);
+    transition:background .12s ease;
+  }
+  .sheet-row:last-child{border-bottom:none;}
+  .sheet-row:hover{background:var(--paper-dim);}
+  .sheet-row.checked{background:var(--green-light);}
+
+  .check-cell{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px 0;
+    border-right:1.5px solid var(--ink);
+    align-self:stretch;
+  }
+  .check-box{
+    width:26px;height:26px;
+    border:2px solid var(--ink);
+    border-radius:3px;
+    position:relative;
+    cursor:pointer;
+    background:#fff;
+    flex-shrink:0;
+    appearance:none;
+    -webkit-appearance:none;
+    margin:0;
+  }
+  .check-box:checked{
+    background:var(--green);
+    border-color:var(--green);
+  }
+  .check-box:checked::after{
+    content:"";
+    position:absolute;
+    left:7px;top:2px;
+    width:7px;height:13px;
+    border:solid #fff;
+    border-width:0 3px 3px 0;
+    transform:rotate(40deg);
+  }
+  .check-box:focus-visible{
+    outline:2px solid var(--red);
+    outline-offset:2px;
+  }
+
+  .course-cell{
+    padding:16px 20px;
+    cursor:pointer;
+  }
+  .course-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--stone-dark);
+    display:block;
+    margin-bottom:3px;
+  }
+  .course-title{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:16.5px;
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .course-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--green);
+    border:1px solid var(--green);
+    border-radius:2px;
+    padding:1px 6px;
+    margin-left:10px;
+    vertical-align:middle;
+  }
+
+  .tally-cell{
+    padding:16px 16px;
+    border-left:1.5px solid var(--ink);
+    text-align:center;
+    align-self:stretch;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .tally-num{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:500;
+    font-size:20px;
+  }
+  .tally-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--stone-dark);
+    margin-top:1px;
+  }
+
+  /* suggest your own row */
+  .suggest-row{
+    border-top:2px dashed var(--ink);
+    padding:20px;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .suggest-row .lbl{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    white-space:nowrap;
+  }
+  .suggest-row input[type=text]{
+    flex:1;
+    min-width:220px;
+    border:1.5px solid var(--ink);
+    border-radius:2px;
+    padding:10px 12px;
+    font-family:'Source Serif 4',serif;
+    font-size:15px;
+    background:#fff;
+  }
+  .suggest-row input[type=text]:focus{
+    outline:2px solid var(--red);
+    outline-offset:1px;
+  }
+
+  /* ===== SIGNUP FORM ===== */
+  .form-section{
+    padding:48px 24px 80px;
+  }
+  .form-card{
+    border:2px solid var(--ink);
+    background:#fff;
+    padding:36px;
+    max-width:680px;
+    margin:0 auto;
+  }
+  .form-card h2{font-size:26px;margin-bottom:8px;}
+  .form-card .sub{
+    color:#5a554a;
+    font-size:14.5px;
+    margin:0 0 28px;
+  }
+  .field-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--stone-dark);
+  }
+  .field input, .field select, .field textarea{
+    border:1.5px solid var(--ink);
+    border-radius:2px;
+    padding:11px 12px;
+    font-family:'Source Serif 4',serif;
+    font-size:15px;
+    background:var(--paper);
+    width:100%;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--red);
+    outline-offset:1px;
+    background:#fff;
+  }
+  .field select{appearance:auto;}
+
+  .selected-strip{
+    background:var(--green-light);
+    border:1.5px solid var(--green);
+    border-radius:2px;
+    padding:12px 14px;
+    margin-bottom:20px;
+    font-size:14px;
+    min-height:20px;
+  }
+  .selected-strip .lbl{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--green);
+    display:block;
+    margin-bottom:6px;
+  }
+  .selected-strip .empty{color:var(--stone-dark);font-style:italic;}
+  .chip{
+    display:inline-block;
+    background:#fff;
+    border:1px solid var(--green);
+    color:var(--green);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    padding:3px 9px;
+    border-radius:2px;
+    margin:0 6px 6px 0;
+  }
+
+  .submit-btn{
+    width:100%;
+    background:var(--red);
+    color:#fff;
+    border:none;
+    border-radius:2px;
+    padding:16px;
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    cursor:pointer;
+    margin-top:8px;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .submit-btn:hover{background:var(--red-dark);transform:translateY(-1px);}
+  .submit-btn:disabled{background:var(--stone);cursor:not-allowed;transform:none;}
+
+  .form-foot{
+    font-size:12.5px;
+    color:var(--stone-dark);
+    margin-top:14px;
+    text-align:center;
+  }
+
+  .success{
+    display:none;
+    text-align:center;
+    padding:20px 0;
+  }
+  .success.show{display:block;}
+  .success .ti{font-size:40px;color:var(--green);}
+  .success h3{margin:14px 0 6px;font-size:22px;}
+  .success p{color:#5a554a;font-size:14.5px;max-width:420px;margin:0 auto;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    border-top:2px solid var(--ink);
+    padding:28px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--stone-dark);
+  }
+
+  @media (max-width:720px){
+    .how-row{grid-template-columns:1fr 1fr;}
+    .sheet-row{grid-template-columns:48px 1fr 84px;}
+    .field-grid{grid-template-columns:1fr;}
+    .course-title{font-size:15px;}
+    .form-card{padding:24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Get Me<span>Employed</span></div>
+  <button class="header-cta" onclick="document.getElementById('signup').scrollIntoView()">Sign up</button>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Sydney · in-person · hands-on</div>
+    <h1>Not another online course. <em>In-person</em> impactful short courses delivered by <em>industry experts</em> to boost your <em>employability</em></h1>
+    <p class="hero-sub">We're getting ready to run our next hands-on workshops where you take a big step to become <strong>seriously employable</strong>, Tell us which course(s) interest you the most to help us prioritise our programs.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><b id="meta-courses">10</b>courses on the table</div>
+      <div class="hero-meta-item"><b id="meta-interest">0</b>people interested so far</div>
+      <div class="hero-meta-item"><b>Limited</b>spots per workshop</div>
+      <div class="hero-meta-item"><b>Become Employable</b>delivered by industry experts</div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap how-row">
+    <div class="how-step"><span class="num">Step 1</span><p>Check every course you'd attend — pick one, a few, or all of them.</p></div>
+    <div class="how-step"><span class="num">Step 2</span><p>Leave your details so we can reach you when dates are set.</p></div>
+    <div class="how-step"><span class="num">Step 3</span><p>We build the most popular course into a full practical bootcamp.</p></div>
+    <div class="how-step"><span class="num">Step 4</span><p>You attend in person, get hands-on practice, and walk out with a certificate.</p></div>
+  </div>
+</section>
+
+<section class="roster-section">
+  <div class="wrap">
+    <div class="roster-head">
+      <div>
+        <h2>The roster</h2>
+        <p>This is a live sign-up sheet — the count updates as people check in.</p>
+      </div>
+      <div class="tally-note">Tap a row to check it</div>
+    </div>
+
+    <div class="sheet" id="sheet">
+      <!-- rows injected by JS -->
+    </div>
+
+    <div class="suggest-row">
+      <span class="lbl">Don't see it?</span>
+      <input type="text" id="suggestInput" placeholder="Suggest a course you'd want to attend">
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="signup">
+  <div class="form-card">
+    <div id="formBody">
+      <h2>Reserve your interest</h2>
+      <p class="sub">No payment, no commitment — just tells us you're in if the bootcamp runs.</p>
+
+      <div class="selected-strip" id="selectedStrip">
+        <span class="lbl">Courses checked</span>
+        <span class="empty" id="selectedEmpty">None selected yet — check some boxes above.</span>
+        <div id="selectedChips"></div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label for="fName">Full name</label>
+          <input type="text" id="fName" required>
+        </div>
+        <div class="field">
+          <label for="fEmail">Email</label>
+          <input type="email" id="fEmail" required>
+        </div>
+        <div class="field">
+          <label for="fPhone">Mobile</label>
+          <input type="tel" id="fPhone" placeholder="04XX XXX XXX">
+        </div>
+        <div class="field">
+          <label for="fRole">Current role</label>
+          <input type="text" id="fRole" placeholder="e.g. Project Manager">
+        </div>
+        <div class="field full">
+          <label for="fIndustry">Industry</label>
+          <select id="fIndustry">
+            <option value="">Select one</option>
+            <option>Healthcare & aged care</option>
+            <option>Social work / community services</option>
+            <option>Marketing & advertising</option>
+            <option>Project management / operations</option>
+            <option>Business leadership / management</option>
+            <option>IT / technology</option>
+            <option>Education</option>
+            <option>Finance & professional services</option>
+            <option>Government / public sector</option>
+            <option>Retail / hospitality</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="fNotes">Anything else? (optional)</label>
+          <textarea id="fNotes" rows="2" placeholder="Preferred days, what you're hoping to get out of it, etc."></textarea>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">Submit my interest</button>
+      <p class="form-foot">Spots are limited per workshop. We'll only contact you about bootcamp dates and details.</p>
+    </div>
+
+    <div class="success" id="successBlock">
+      <i class="ti" style="font-family:inherit;">✓</i>
+      <h3>You're on the list</h3>
+      <p>Thanks — we'll be in touch as soon as dates are locked in for the bootcamp you're most interested in.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>getmeemployed.com.au</div>
+  <div>Practical AI bootcamps, built around what people actually want to learn.</div>
+</footer>
+
+<script>
+const COURSES = [
+  {id:1, title:"Foundations of Gen AI in everyday professional life", tag:"Foundations"},
+  {id:2, title:"Prompt engineering to maximise benefits from AI tools", tag:"Skills"},
+  {id:3, title:"Digital marketing and social media advertising", tag:"Marketing"},
+  {id:4, title:"AI in social work, aged care and health", tag:"Sector"},
+  {id:5, title:"Cybersecurity and safety", tag:"Skills"},
+  {id:6, title:"AI-powered project management", tag:"Operations"},
+  {id:7, title:"Business leadership in the age of AI agents", tag:"Leadership"},
+  {id:8, title:"Agentic AI and automation", tag:"Skills"},
+  {id:9, title:"Data visualisation and storytelling", tag:"Skills"},
+  {id:10, title:"AI-powered branding and brand development", tag:"Marketing"},
+];
+
+let selected = new Set();
+let tallies = {};
+COURSES.forEach(c => tallies[c.id] = 0);
+
+const STORAGE_KEY = "course_tallies";
+
+async function loadTallies(){
+  // try Supabase first (works once deployed)
+  if(SUPABASE_URL && SUPABASE_ANON_KEY){
+    try{
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/signups?select=courses`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if(res.ok){
+        const rows = await res.json();
+        COURSES.forEach(c => tallies[c.id] = 0);
+        rows.forEach(row => {
+          (row.courses || []).forEach(title => {
+            const match = COURSES.find(c => c.title === title);
+            if(match) tallies[match.id]++;
+          });
+        });
+        renderSheet();
+        updateMeta();
+        return;
+      }
+    }catch(e){ /* fall through to local storage below */ }
+  }
+
+  // fallback: local artifact-preview storage
+  try{
+    const result = await window.storage.get(STORAGE_KEY, true);
+    if(result && result.value){
+      const saved = JSON.parse(result.value);
+      COURSES.forEach(c => { if(saved[c.id] !== undefined) tallies[c.id] = saved[c.id]; });
+    }
+  }catch(e){
+    // no data yet, keep zeros
+  }
+  renderSheet();
+  updateMeta();
+}
+
+async function saveTallies(){
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(tallies), true);
+  }catch(e){
+    console.error("Could not save tallies", e);
+  }
+}
+
+function renderSheet(){
+  const sheet = document.getElementById('sheet');
+  sheet.innerHTML = '';
+  COURSES.forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'sheet-row' + (selected.has(c.id) ? ' checked' : '');
+    row.innerHTML = `
+      <div class="check-cell">
+        <input type="checkbox" class="check-box" id="chk-${c.id}" ${selected.has(c.id) ? 'checked' : ''}>
+      </div>
+      <div class="course-cell">
+        <span class="course-num">Course ${String(c.id).padStart(2,'0')}</span>
+        <span class="course-title">${c.title}</span><span class="course-tag">${c.tag}</span>
+      </div>
+      <div class="tally-cell">
+        <span class="tally-num">${tallies[c.id]}</span>
+        <span class="tally-label">interested</span>
+      </div>
+    `;
+    row.querySelector('.course-cell').addEventListener('click', () => toggle(c.id));
+    row.querySelector('.check-box').addEventListener('click', (e) => { e.stopPropagation(); toggle(c.id); });
+    sheet.appendChild(row);
+  });
+}
+
+function toggle(id){
+  if(selected.has(id)){
+    selected.delete(id);
+  } else {
+    selected.add(id);
+  }
+  renderSheet();
+  renderSelectedStrip();
+}
+
+function renderSelectedStrip(){
+  const chips = document.getElementById('selectedChips');
+  const empty = document.getElementById('selectedEmpty');
+  chips.innerHTML = '';
+  if(selected.size === 0){
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  COURSES.filter(c => selected.has(c.id)).forEach(c => {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = c.title;
+    chips.appendChild(chip);
+  });
+}
+
+function updateMeta(){
+  const total = Object.values(tallies).reduce((a,b)=>a+b, 0);
+  document.getElementById('meta-interest').textContent = total;
+}
+
+async function submitForm(){
+  const name = document.getElementById('fName').value.trim();
+  const email = document.getElementById('fEmail').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  const role = document.getElementById('fRole').value.trim();
+  const industry = document.getElementById('fIndustry').value;
+  const notes = document.getElementById('fNotes').value.trim();
+  const suggestion = document.getElementById('suggestInput').value.trim();
+
+  if(!name || !email){
+    alert('Please fill in your name and email so we can reach you.');
+    return;
+  }
+  if(selected.size === 0 && !suggestion){
+    alert('Please check at least one course, or suggest your own.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  const entry = {
+    id: 'signup_' + Date.now() + '_' + Math.random().toString(36).slice(2,8),
+    name, email, phone, role, industry, notes,
+    courses: COURSES.filter(c => selected.has(c.id)).map(c => c.title),
+    suggestion,
+    submitted_at: new Date().toISOString()
+  };
+
+  try{
+    await submitToSupabase(entry);
+
+    // optional local mirror — only works while previewing inside Claude,
+    // harmless no-op once this is deployed on your own domain
+    try{
+      await window.storage.set(entry.id, JSON.stringify(entry), true);
+      selected.forEach(id => { tallies[id] = (tallies[id] || 0) + 1; });
+      await saveTallies();
+    }catch(_){ /* not running inside Claude artifact preview, ignore */ }
+
+    document.getElementById('formBody').style.display = 'none';
+    document.getElementById('successBlock').classList.add('show');
+    renderSheet();
+    updateMeta();
+  }catch(e){
+    console.error(e);
+    alert('Something went wrong submitting your interest. Please try again, or contact us directly.');
+    btn.disabled = false;
+    btn.textContent = 'Submit my interest';
+  }
+}
+
+/*
+  ============================================================
+  SUPABASE SETUP — do this once before going live
+  ============================================================
+
+  1. Create a free project at supabase.com
+
+  2. In the Supabase SQL editor, run this once to create the table:
+
+  create table signups (
+    id text primary key,
+    name text not null,
+    email text not null,
+    phone text,
+    role text,
+    industry text,
+    notes text,
+    courses text[],
+    suggestion text,
+    submitted_at timestamptz
+  );
+
+  alter table signups enable row level security;
+
+  create policy "Allow public inserts" on signups
+    for insert to anon
+    with check (true);
+
+  3. Go to Project Settings -> Data API. Copy your Project URL and
+     the "anon public" key (NOT the service_role key — that one is
+     secret and must never go in this file).
+
+  4. Paste both values into the two constants directly below.
+
+  5. To view and export signups later: Supabase dashboard -> Table
+     Editor -> signups. You can sort, filter, and export to CSV
+     from there, or query it (e.g. count by course) any time.
+  ============================================================
+*/
+const SUPABASE_URL = "";       // e.g. "https://xxxxxxx.supabase.co"
+const SUPABASE_ANON_KEY = "";  // your anon public key (safe to expose client-side)
+
+async function submitToSupabase(entry){
+  if(!SUPABASE_URL || !SUPABASE_ANON_KEY){
+    throw new Error('Supabase is not configured yet — add SUPABASE_URL and SUPABASE_ANON_KEY near the bottom of the script.');
+  }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/signups`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(entry)
+  });
+  if(!res.ok){
+    throw new Error('Supabase insert failed: ' + res.status);
+  }
+}
+
+loadTallies();
+</script>
+
+</body>
+</html>
